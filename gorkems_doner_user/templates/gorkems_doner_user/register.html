@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Account{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/users/register.css' %}">
+{% endblock %}
+{% block content %}
+<div class="hero-wrap hero-bread">
+  <div class="container">
+    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'shop' %}">Shop</a></span> / <span>Create Account</span>
+    </p>
+    <h1 class="mb-0 bread">Create Account</h1>
+  </div>
+</div>
+<section class="mb-5">
+  <div class="container py-5 mb-5">
+    <div class="row">
+      <div class="col-md-6 pt-5">
+        <div class="regImg">
+          <img src="{% static 'images/users/register.svg' %}" alt="Register Img">
+        </div>
+        <div class="text-center py-5">
+          <p>Already have an account? Please <a class="btn-login" href="{% url 'login' %}">Login</a>.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3 class="text-center py-5">Please register to order quickly.</h3>
+        {% if messages %}
+        {% for message in messages %}
+        <div
+          class="alert {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}alert-success{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert-danger{% endif %}"
+          role="alert">
+          <h5 class="text-center">{{ message }}</h5>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form action="{% url 'register' %}" method="post" novalidate>
+          {% csrf_token %}
+          {{ form.nonefield_errors }}
+
+          <div class="form-floating mb-3">
+            {{ form.first_name }}
+            <label for="floatingInput">{{ form.first_name.label }}</label>
+            <small class="form-text text-muted">{{ form.first_name.errors }}</small>
+          </div>
+
+
+          <div class="form-floating mb-3">
+            {{ form.last_name }}
+            <label for="floatingInput">{{ form.last_name.label }}</label>
+            <small class="form-text text-muted">{{ form.last_name.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.username }}
+            <label for="floatingInput">{{ form.username.label }}</label>
+            <small class="form-text text-muted">{{ form.username.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.email }}
+            <label for="floatingInput">{{ form.email.label }}</label>
+            <small class="form-text text-muted" style="color: #82AE46!important;">{{ form.email.help_text }}</small>
+            <small class="form-text text-muted">{{ form.email.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.phone_number }}
+            <label for="floatingInput">{{ form.phone_number.label }}</label>
+            <small class="form-text text-muted">{{ form.phone_number.errors }}</small>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="floatingInput">{{ form.country.label }}</label>
+            {{ form.country }}
+            <small class="form-text text-muted">{{ form.country.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.street }}
+            <label for="floatingInput">{{ form.street.label }}</label>
+            <small class="form-text text-muted">{{ form.street.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.postcode }}
+            <label for="floatingInput">{{ form.postcode.label }}</label>
+            <small class="form-text text-muted">{{ form.postcode.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.city }}
+            <label for="floatingInput">{{ form.city.label }}</label>
+            <small class="form-text text-muted">{{ form.city.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.password }}
+            <label for="floatingInput">{{ form.password.label }}</label>
+            <small class="form-text text-muted">{{ form.password.errors }}</small>
+          </div>
+
+          <div class="form-floating mb-3">
+            {{ form.confirm_password }}
+            <label for="floatingInput">{{ form.confirm_password.label }}</label>
+            <small class="form-text text-muted">{{ form.confirm_password.errors }}</small>
+          </div>
+          
+          <div class="text-center">
+            <button type="submit" class="btn btn-register py-3 px-5">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

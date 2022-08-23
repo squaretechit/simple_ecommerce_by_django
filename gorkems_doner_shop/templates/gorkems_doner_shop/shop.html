@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Shop{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/shop/shop.css' %}">
+{% endblock %}
+{% block content %}
+<section class="shop-first-section">
+    <div class="container">
+        <p class="fs-1">Gorkems Doner</p>
+    </div>
+</section>
+<section>
+    <div class="container py-5">
+        <div class="row py-5">
+            <div class="col-md-8">
+                {% for category in categories %}
+                    <div class="categories py-3 my-5">
+                        <p class="fs-3 mb-0 text-center text-white">{{ category.category }}</p>
+                    </div>
+                    {% for product in products %}
+                        {% if product.category.category == category.category and product.product_status == 'instock' %}
+                        <div class="card my-3 ps-3 pe-3 py-3">
+                            <p class="fs-3">{{ product.name }}</p>
+                            {{ product.description|safe }}
+                            <p>{{ product.price }} €</p>
+                            <p class="cart ps-2 pe-2 py-2" product-id="{{ product.id }}" product-url="{% url 'shop' %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <p class="fs-1">Kontakt</p>
+                <p>Gorkems Doner<br>
+                    Schwabacher Str. 250<br>
+                    90763 Fürth</p>
+                <p class="mb-0">Telefon:</p>
+                <a href="#">+49 911 780 96 22</a>
+                <p class="mb-0 mt-3">E-Mail:</p>
+                <a href="#">mail@derkleineinder.de</a>
+
+
+                <p class="fs-1 mt-5">Öffnungszeiten</p>
+                <p>Bitte beachten Sie unsere vorläufig geänderten Öffnungszeiten</p>
+
+                <p>Sonntag bis Freitag:<br>
+                    11:30 – 13:30<br>
+                    17:00 – 21:30</p>
+
+                <p>Samstag:<br>
+                    17:00 – 21:30</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% csrf_token %}
+{% endblock %}
+{% block js %}
+{% if user.is_authenticated %}
+<script>
+    let add_to_cart_btn = document.querySelectorAll('.cart.ps-2.pe-2.py-2'),
+        current_cart_status = document.querySelector('.cart-count');
+    for (let cart = 0; cart < add_to_cart_btn.length; cart++){
+        add_to_cart_btn[cart].addEventListener('click', function(){
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const URL = add_to_cart_btn[cart].getAttribute('product-url');
+            let product_id = add_to_cart_btn[cart].getAttribute('product-id');
+            fetch(URL, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify({
+                        'product_id': product_id
+                    })
+                })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                current_cart_status.innerText = data['results'];
+            })
+        })
+    }
+</script>
+{% else %}
+<script>
+    let add_to_cart_btn = document.querySelectorAll('.cart.ps-2.pe-2.py-2'),
+        current_cart_status = document.querySelector('.text-decoration-none.cart-count');
+
+    for (let cart = 0; cart < add_to_cart_btn.length; cart++){
+        add_to_cart_btn[cart].addEventListener('click', function(){
+            location.href = "{% url 'login' %}";
+        })
+    }
+</script>
+{% endif %}
+{% endblock %}

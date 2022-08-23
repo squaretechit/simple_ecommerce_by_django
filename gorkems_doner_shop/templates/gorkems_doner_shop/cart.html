@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/shop/cart.css' %}">
+{% endblock %}
+{% block content %}
+{% if minimum_total_price < 13 %}
+<section class="py-5">
+    <div class="container">
+        <div class="card warning-card py-3">
+            <p class="fs-4 text-white mb-0 text-center">
+                You must have an order with a minimum of 13.00€ to place your order, your current order total is {{ minimum_total_price }}€.</p>
+        </div>
+    </div>
+</section>
+{% endif %}
+<section class="py-5 mb-5">
+    <div class="container">
+        <ul class="list-group cart-title">
+            <li class="list-group-item d-flex justify-content-around align-items-center my-3 cart-product-card">
+                <span>S/N</span>
+                <span>Delete</span>
+                <span>Product name</span>
+                <span>Price</span>
+                <span>Quantity</span>
+                <span>Total</span>
+            </li>
+        </ul>
+        <ol class="list-group list-group-numbered" id="all_cart_product">
+            {% for cart in carts %}
+            <li class="list-group-item d-flex justify-content-around align-items-center my-3 cart-product-card">
+                <button type="button" class="btn cart-delete-product" cart-product-id="{{ cart.id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
+                </button>
+                <span>{{ cart.product_name }}</span>
+                <span>{{ cart.price }} €</span>
+                <span>
+                    <input type="number" value="{{ cart.quantity }}" class="single_cart_product_info" product-id="{{ cart.id }}">
+                </span>
+                <span>{{ cart.total_price }} €</span>
+            </li>
+            {% endfor %}
+        </ol>
+        <div class="text-center">
+            <button class="btn cart-btn" id="update_cart">Update Cart</button>
+            <a href="{% url 'checkout' %}" class="btn cart-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+</section>
+{% csrf_token %}
+{% endblock %}
+{% block js %}
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const URL = "{% url 'cart' %}";
+    let cart_delete_product = document.querySelectorAll('.btn.cart-delete-product'),
+        current_cart_status = document.querySelector('.text-decoration-none.cart-count'),
+        all_cart_product = document.querySelector('#all_cart_product'),
+        update_cart = document.querySelector('#update_cart');
+    for (let cart_delete = 0; cart_delete < cart_delete_product.length; cart_delete++){
+        cart_delete_product[cart_delete].addEventListener('click', function(){
+            let product_id = cart_delete_product[cart_delete].getAttribute('cart-product-id');
+            fetch(URL, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                    'product_id': product_id,
+                    'delete' : 'True',
+                    'Update' : 'False'
+                })
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                location.reload()
+            })
+        })
+    }
+    update_cart.addEventListener('click', function(){
+        let single_cart_product_info_update = document.querySelectorAll('.single_cart_product_info'),
+            update_info_for_server = {};
+        for(let update_cart = 0; update_cart < single_cart_product_info_update.length; update_cart++){
+            update_info_for_server[single_cart_product_info_update[update_cart].getAttribute('product-id')] = single_cart_product_info_update[update_cart].value;
+        }
+        fetch(URL, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                'product': update_info_for_server,
+                'delete' : 'False',
+                'update' : 'True'
+            })
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            location.reload()
+        })
+    })
+</script>
+{% endblock %}

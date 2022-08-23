@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Paypal Payment Complete{% endblock %}
+{% block css %}
+<style>
+    body{
+        height: 100vh;
+    }
+    .mb-0.fs-3.text-center a {
+        text-decoration: none;
+        color: green;
+    }
+
+    footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <p class="mb-0 fs-3 text-center">Your have successfully complete your order. Please look at to
+             your order page for the <a href="{% url 'orders' %}">order tracking</a></p>
+    </div>
+</section>
+{% endblock %}

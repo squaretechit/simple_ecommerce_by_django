@@ -1,0 +1,26 @@
+body{
+    background-color: #121212;
+}
+.breadcrumbs{
+    display: none;
+}
+
+.btn-check-income {
+    background-color: #CDA563;
+    color: #ffffff;
+    padding: 6px 30px;
+}
+
+.btn-check-income:hover {
+    background-color: red;
+    color: #ffffff;
+}
+
+.income-check-form label{
+    color: #ffffff;
+}
+
+.income-check-form input:focus{
+    background-color: #000000;
+    box-shadow: none;
+}

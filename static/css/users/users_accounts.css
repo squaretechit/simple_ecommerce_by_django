@@ -1,0 +1,224 @@
+.errorlist {
+    padding-left: 0;
+}
+
+.errorlist li {
+    list-style: none;
+    color: #CDA563;
+    font-size: 14px;
+}
+
+.conFirSec {
+    margin-top: 65px;
+    display: flex;
+    margin-bottom: 10px
+}
+
+.conFirSec span {
+    background: red;
+    display: block;
+    width: 80px;
+    height: 2px;
+    margin-top: 5px;
+    position: relative;
+    top: 0;
+    transition: all ease-in-out .4s;
+    z-index: 0;
+    margin-bottom: 10px;
+    margin-right: 20px
+}
+
+.conHeader h5 {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #CDA563;
+}
+
+.conHeader h1 a {
+    font-size: 65px;
+    letter-spacing: 5px;
+    color: #CDA563 !important
+}
+
+.logsecSec {
+    margin-bottom: 100px
+}
+
+.red-card {
+    background-color: red;
+    padding: 50px;
+    border-radius: 5px
+}
+
+.logContent {
+    width: 40%
+}
+
+.logAnimation {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    -webkit-animation: loginAnimation 2s infinite alternate;
+    animation: loginAnimation 1s infinite alternate
+}
+
+.logAnimation img {
+    height: 100%;
+    width: 100%
+}
+
+.success-message {
+    color: #CDA563;
+}
+
+.error-message {
+    color: #CDA563;
+}
+
+@keyframes loginAnimation {
+    0% {
+        transform: translateY(0)
+    }
+
+    100% {
+        transform: translateY(-20px)
+    }
+}
+
+.logContent p {
+    margin-top: 50px;
+    text-align: justify;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.logContent h4 {
+    text-align: center
+}
+
+.loginForm {
+    width: 50%
+}
+
+.loginForm h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+form {
+    margin-top: 20px
+}
+
+.form-group {
+    border-bottom: 1px solid #fff;
+    /* padding-bottom: 10px; */
+    margin-bottom: 20px
+}
+
+.form-group label {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 5px
+}
+
+.form-group input {
+    border: none;
+    background: 0 0;
+    width: 60%;
+    color: #fff
+}
+
+.form-group input::placeholder {
+    color: #fff;
+    font-size: 15px
+}
+
+.form-group input:focus {
+    outline: 0;
+    color: #fff;
+    font-size: 15px
+}
+
+.btn-user {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    background-color: #fff;
+    color: #CDA563;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px
+}
+
+.regRight,
+.regleft {
+    width: 40%
+}
+
+.helpText {
+    margin: 10px 0;
+    color: green !important;
+    font-size: 12px
+}
+
+.regRight .form-group input,
+.regleft .form-group input {
+    width: 100%;
+    height: 20%;
+    margin-top: 10px
+}
+
+#id_gender {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 800
+}
+
+#id_gender:focus {
+    outline: 0
+}
+
+.checkRule {
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px
+}
+
+.resetPass input {
+    width: 100% !important;
+    padding: 10px 0
+}
+
+@media all and (max-width:991px) {
+    .conHeader h1 a {
+        font-size: 35px
+    }
+
+    .regRight,
+    .regleft {
+        width: 100%
+    }
+
+    .loginBox {
+        flex-wrap: wrap;
+    }
+
+    .logContent,
+    .loginForm {
+        width: 100%
+    }
+
+    .loginForm {
+        margin-top: 100px
+    }
+
+    .form-group input {
+        width: 100%
+    }
+}

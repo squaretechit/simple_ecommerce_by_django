@@ -1,0 +1,77 @@
+.hero-wrap.hero-bread {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('/static/images/shop/banner.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    height: 500px;
+    color: #ffffff;
+}
+
+.breadcrumbs{
+    padding-top: 200px;
+    text-align: center;
+}
+
+.breadcrumbs a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.bread{
+    text-align: center;
+}
+
+.regImg img {
+    height: 100%;
+    width: 100%;
+}
+
+.errorlist {
+    padding-left: 0;
+}
+
+.errorlist li {
+    list-style: none;
+    color: red;
+    font-size: 14px;
+}
+
+.selectcountry {
+    width: 100%;
+    height: 52px;
+    background: #fff;
+    color: #495057;
+    font-size: 18px;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+}
+
+.selectcountry:focus {
+    outline: none;
+    border: 1px solid #000;
+}
+
+.btn-register{
+    background-color: #CDA563;
+    color: #ffffff;
+}
+
+.btn-register:hover{
+    background-color: red;
+    color: #ffffff;
+}
+
+.btn-login{
+    text-decoration: none;
+    color: #CDA563;
+}
+
+.btn-login:hover{
+    color: red;
+}

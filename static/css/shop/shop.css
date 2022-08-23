@@ -1,0 +1,40 @@
+.shop-first-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('/static/images/shop/banner.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    height: 500px;
+}
+
+.shop-first-section .fs-1 {
+    padding-top: 250px;
+    text-align: center;
+    margin-bottom: 0;
+    color: #ffffff;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.categories {
+    background-color: #CDA563;
+    border-radius: 3px;
+}
+
+.cart {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #CDA563;
+    color: #ffffff;
+    border-radius: 0 3px 0 3px;
+    cursor: pointer;
+}
+
+.cart:hover {
+    background-color: red;
+}
+.card.my-3.ps-3.pe-3.py-3 .fs-3{
+    font-family: 'Shadows Into Light', cursive;
+}

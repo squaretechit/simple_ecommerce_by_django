@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Paypal Payment Cancel{% endblock %}
+{% block css %}
+<style>
+    body{
+        height: 100vh;
+    }
+    .mb-0.fs-3.text-center{
+        color: red;
+    }
+    .mb-0.fs-3.text-center a{
+        text-decoration: none;
+        color: green;
+    }
+    footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <p class="mb-0 fs-3 text-center">Somehow your payment was canceled. Please try to make this payment from 
+            <a href="{% url 'orders' %}">Order Details Page</a>. You can make this payment till 24 Hours.</p>
+    </div>
+</section>
+{% endblock %}

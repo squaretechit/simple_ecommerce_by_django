@@ -1,0 +1,100 @@
+
+.errorlist {
+    padding-left: 0;
+}
+
+.errorlist li {
+    list-style: none;
+    color: red;
+    font-size: 14px;
+}
+
+.selectcountry {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+}
+
+.name-format {
+    width: 350px;
+}
+
+.total-card p {
+    font-size: 22px;
+}
+
+.checkout-input {
+    width: 48%;
+}
+
+.checkout-input input {
+    width: 100%;
+}
+
+.checkout-btn {
+    background-color: #CDA563;
+    color: #ffffff;
+    padding: 10px 30px;
+}
+
+.checkout-btn:hover {
+    background-color: red;
+    color: #ffffff;
+}
+
+.mb-3.form-check.my-5.text-center .form-check-label a{
+    text-decoration: none;
+    color: #CDA563;
+}
+
+.mb-3.form-check.my-5.text-center .form-check-label a:hover{
+    color: red;
+}
+
+#id_different_shipping_address{
+    height: 30px;
+    width: 30px;
+}
+
+#id_payment{
+    list-style: none;
+    font-size: 22px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+#id_payment_0, #id_payment_1{
+    height: 20px;
+    width: 20px;
+    margin-top: 2px;
+}
+
+@media all and (max-width:1280px) {
+    .name-format {
+        width: 310px;
+    }
+}
+@media all and (max-width:1024px) {
+    .name-format {
+        width: 250px;
+    }
+}
+@media all and (max-width:991px) {
+    .name-format {
+        width: 185px;
+    }
+}
+@media all and (max-width:767px) {
+    .billing-form .d-flex.justify-content-between.align-items-center{
+        display: block!important;
+    }
+
+    .checkout-input {
+        width: 100%;
+    }
+
+    .name-format {
+        width: 100%!important;
+    }
+}

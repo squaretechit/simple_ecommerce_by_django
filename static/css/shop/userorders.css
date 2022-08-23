@@ -1,0 +1,44 @@
+
+.order-list-title {
+    background-color: #CDA563;
+    color: #ffffff;
+}
+
+.order-list-title::before {
+    content: 'S/N:' !important;
+}
+
+.order-history {
+    border-top-width: 1px !important;
+}
+
+.order-history span {
+    width: 200px;
+}
+
+.order-history span:nth-child(4) {
+    width: 350px;
+}
+
+@media all and (max-width:1280px) {
+    .order-history span {
+        width: 300px;
+    }
+}
+
+@media all and (max-width:1024px) {
+    .order-history {
+        display: block !important;
+    }
+
+    .order-history span {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+        width: auto;
+    }
+
+    .order-history span:nth-child(4) {
+        width: auto;
+    }
+}

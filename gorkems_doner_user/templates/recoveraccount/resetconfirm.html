@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Reset Password{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/users/users_accounts.css' %}">
+{% endblock %}
+{% block content %}
+
+<section class="logsecSec">
+    <div class="container py-5">
+        <div class="card red-card">
+            <div class="d-flex justify-content-between align-items-center loginBox">
+                <div class="logContent">
+                    <div class="logAnimation">
+                        <img src="{% static 'images/users/resetlogo.png' %}" alt="Aminate Logo">
+                    </div>
+                    <p>Your password will contain at least 8 characters with a-z, A-Z, and Numbers 
+                        or you can use any symbols.</p>
+                </div>
+                <div class="loginForm">
+                    <h2>Reset your password</h2>
+                    <form id="resetForm" action="" method="POST" novalidate>
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group mb-0">
+                            <label>{{ form.password.label }}</label>
+                            {{ form.password }}
+                        </div>
+                        {{ form.password.errors }}
+
+                        <div class="form-group mb-0">
+                            <label>{{ form.confirm_password.label }}</label>
+                            {{ form.confirm_password }}
+                        </div>
+                        {{ form.confirm_password.errors }}
+
+                        <div class="text-center">
+                            <button class="btn-user" type="submit">Reset Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block js %}
+<script>
+    document.querySelector('#resetForm').action = window.location.href;
+</script>
+{% endblock %}

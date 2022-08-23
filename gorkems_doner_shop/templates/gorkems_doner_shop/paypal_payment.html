@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Paypal Payment{% endblock %}
+{% block css %}
+<style>
+    footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <p class="text-center mb-0 fs-3 my-3">
+            Please make the payment by paypal and confirm your order.
+        </p>
+        <h1 class="text-center my-5">
+            {% csrf_token %}
+            {{ form.render }}
+        </h1>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let main_form = document.querySelector('form'),
+        URL = "{% url 'paypal-payment' transaction=transaction %}",
+        id_currency_code = document.querySelector('#id_currency_code'),
+        id_business = document.querySelector('#id_business'),
+        id_amount = document.querySelector('#id_amount'),
+        id_item_name = document.querySelector('#id_item_name'),
+        id_invoice = document.querySelector('#id_invoice');
+    id_currency_code.value = '';
+    id_business.value = '';
+    id_amount.value = '';
+    id_item_name.value = '';
+    id_invoice.value = '';
+    main_form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        fetch(URL, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrftoken,
+                }
+            })
+        .then(response => response.json())
+        .then(data => {
+            id_business.value = data['results']['business'];
+            id_amount.value = data['results']['amount'];
+            id_item_name.value = data['results']['item_name'];
+            id_invoice.value = data['results']['invoice'];
+            id_currency_code.value = data['results']['currency_code'];
+            main_form.submit();
+        })
+    });
+</script>
+{% endblock %}

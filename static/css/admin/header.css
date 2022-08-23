@@ -1,0 +1,154 @@
+/* Bootstrap */
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.d-none {
+    display: none;
+}
+
+/* Header */
+
+#site-name a {
+    color: #ffffff !important;
+}
+
+#admin-notification {
+    margin-right: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+#admin-notification button {
+    height: 30px;
+    width: 30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#admin-notification button svg {
+    height: 100%;
+    width: 100%;
+    color: #ffffff;
+}
+
+#admin-notification button span {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background-color: red;
+    border-radius: 100%;
+    min-height: 20px;
+    min-width: 20px;
+    text-align: center;
+    color: #ffffff;
+    padding: 2px 2px 0 2px;
+}
+
+#notification-body {
+    position: fixed;
+    background-color: #417690;
+    top: 60px;
+    right: 180px;
+    min-width: 500px;
+    z-index: 9;
+}
+
+#notification-body ul {
+    margin: 0;
+    padding-left: 0;
+}
+
+#notification-body ul a {
+    display: block;
+}
+
+#notification-body ul a li {
+    list-style: none;
+    padding: 20px;
+    font-size: 20px;
+}
+
+#navigation-bar {
+    position: relative;
+    cursor: pointer;
+}
+
+#navigation-bar button {
+    cursor: pointer;
+    min-width: 130px;
+    display: flex;
+    background-color: transparent;
+    align-items: center;
+    border: none;
+    color: #ffffff;
+}
+
+.navigation-logo {
+    height: 40px;
+    width: 40px;
+    margin-right: 20px;
+}
+
+.navigation-logo img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+}
+
+#bottom-nav {
+    position: fixed;
+    background-color: #417790;
+    top: 60px;
+    z-index: 1;
+}
+
+#bottom-nav ul {
+    margin: 0;
+    list-style: none;
+    padding-left: 0;
+    min-width: 130px;
+}
+
+#bottom-nav ul a {
+    display: block;
+    text-decoration: none;
+}
+
+#bottom-nav ul a li {
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+#user-tools {
+    display: none;
+}
+
+/* Body */
+
+.dashboard #content {
+    width: auto;
+}
+
+@media all and (max-width:1024px) {
+    #bottom-nav {
+        top: 100px;
+    }
+
+    #notification-body {
+        top: 100px;
+        width: 90%;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+    }
+}

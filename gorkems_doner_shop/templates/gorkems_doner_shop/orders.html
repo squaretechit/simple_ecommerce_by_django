@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Orders History{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/shop/userorders.css' %}">
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <p class="fs-1">Orders History</p>
+        <div class="text-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}alert-success{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert-danger{% endif %}"
+                role="alert">
+                <h5 class="text-center">{{ message }}</h5>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <ol class="list-group mb-3">
+            <li
+                class="order-list-title list-group-item d-flex justify-content-between align-items-center order-history">
+                <span>Date Ordered</span>
+                <span>Status</span>
+                <span>Total Amount</span>
+                <span>Transaction ID</span>
+                <span>Details</span>
+            </li>
+        </ol>
+        <div class="all-orders">
+            <ol class="list-group list-group-numbered">
+                {% for order in all_user_orders %}
+                <li class="my-3 list-group-item d-flex justify-content-between align-items-center order-history">
+                    <span>{{ order.date_ordered }}</span>
+                    <span>{{ order.order_status }}</span>
+                    <span>{{ order.total_price }} €</span>
+                    <span>{{ order.transaction_id }}</span>
+                    <span><a href="{% url 'single_order' transaction=order.transaction_id %}">Details</a></span>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</section>
+{% endblock %}

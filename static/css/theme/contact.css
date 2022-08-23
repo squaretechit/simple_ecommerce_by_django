@@ -1,0 +1,36 @@
+/* Contact Page */
+.errorlist {
+    padding-left: 0;
+}
+
+.errorlist li {
+    list-style: none;
+    color: red;
+    font-size: 14px;
+}
+
+.navbar-default {
+    background: -webkit-linear-gradient(to right, #6a8d9b, #d3bf9f) !important;
+    background: linear-gradient(to right, #6a8d9b, #d3bf9f) !important;
+    box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%) !important;
+    padding: 10px 0 !important;
+    width: 100% !important;
+}
+
+.cont_title{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.btn-contact{
+    background-color: #CDA563;
+    color: #ffffff;
+    padding: 10px 30px;
+}
+
+.btn-contact:hover{
+    background-color: red;
+    color: #ffffff;
+}
+
+/* Message Page */

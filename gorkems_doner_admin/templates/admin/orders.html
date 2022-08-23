@@ -1,0 +1,68 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block admincss %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin/order.css' %}">
+{% endblock %}
+{% block content %}
+<section>
+    <div class="container">
+        <p class="fs-1 my-5 text-white">All Orders</p>
+        <ol class="list-group mb-3">
+            <li
+                class="order-list-title list-group-item d-flex justify-content-between align-items-center order-history">
+                <span>Date Ordered</span>
+                <span>Status</span>
+                <span>Total Amount</span>
+                <span>Transaction ID</span>
+                <span>Details</span>
+            </li>
+        </ol>
+        <div class="all-orders">
+            <ol class="list-group list-group-numbered">
+                {% for order in all_user_orders %}
+                    {% if order.order_status == 'Pending' %}
+                        <li class="my-3 list-group-item d-flex justify-content-between align-items-center order-history">
+                            <span>{{ order.date_ordered }}</span>
+                            <span>{{ order.order_status }}</span>
+                            <span>{{ order.total_price }} €</span>
+                            <span>{{ order.transaction_id }}</span>
+                            <span><a class="history-details" href="{% url 'admin_single_order' transaction=order.transaction_id %}">Details</a></span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
+        <ul class="pagination justify-content-center">
+            {% if all_user_orders.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ all_user_orders.previous_page_number }}" class="page-link">Previous</a>
+                </li>
+            {% endif %}
+            {% for i in all_user_orders.paginator.page_range %}
+                {% if all_user_orders.number == i %}
+                    <li class="page-item">
+                        <a href="?page={{ i }}" class="page-link active">{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if all_user_orders.has_next %}
+              <li class="page-item">
+                  <a class="page-link" href="?page={{ all_user_orders.next_page_number }}">Next</a>
+              </li>
+            {% else %}
+            {% endif %}
+        </ul>
+    </div>
+</section>
+{% endblock %}
+
+{% block adminjs %}
+<!-- Optional JavaScript; Bootstrap Bundle with Popper -->
+<script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}

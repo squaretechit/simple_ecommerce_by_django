@@ -1,0 +1,134 @@
+body,html,h1,h2,h3,h4,h5,h6,p,a,span,button,input{
+    font-family: "open sans", sans-serif;
+}
+
+/* Header CSS */
+
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    z-index: 9;
+}
+
+.nav-logo {
+    width: 150px;
+    height: 80px;
+}
+
+.nav-logo img {
+    height: 100%;
+    width: 100%;
+}
+
+.authenticated-menu{
+    min-width: 200px;
+    padding: 0;
+}
+
+.btn.unauthenticated-menu:focus,
+.btn.authenticated-menu,
+.btn-close:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn.unauthenticated-menu, .authenticated-menu-logo {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+}
+
+.btn.unauthenticated-menu svg, .btn.authenticated-menu img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+}
+
+.menu-modal-content {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    top: 0;
+    width: 100%;
+    z-index: 111;
+    padding: 70px 0;
+}
+
+.menu-modal-content .card {
+    width: 30vw;
+    min-height: 85vh;
+    margin: 0 auto;
+}
+
+.nav-menu svg {
+    color: #CDA563;
+}
+
+.nav-menu svg:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.modal-body .list-group a {
+    text-decoration: none;
+}
+
+.modal-body .list-group a .list-group-item:hover {
+    background-color: #CDA563;
+    color: #ffffff;
+}
+
+.cart-count {
+    font-size: 13px;
+    background-color: red;
+    color: #ffffff;
+    border-radius: 100%;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+
+.nav-menu .text-decoration-none.me-3.position-relative:hover .cart-count{
+    background-color: #CDA563;
+}
+
+.btn.menu-close:hover {
+    color: #CDA563;
+}
+
+/* Footer CSS */
+
+.bottom-bar {
+    background-color: #CDA563;
+    color: #ffffff;
+}
+
+.bottom-bar a {
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.bottom-bar a:hover {
+    color: red;
+}
+
+/* Responsive Code */
+@media all and (max-width:1024px){
+    .menu-modal-content .card {
+        width: 90%;
+    }
+}
+@media all and (max-width:500px){
+    .btn.authenticated-menu .ms-3.text-uppercase{
+        display: none;
+    }
+    .authenticated-menu{
+        min-width: auto;
+    }
+}

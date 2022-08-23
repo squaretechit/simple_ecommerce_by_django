@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block admincss %}
+<link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/message/message.css' %}">
+<style>
+    body {
+        background-color: #121212;
+    }
+
+    .breadcrumbs {
+        display: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!-- message users list -->
+                <div class="card ps-3 pe-3 py-3">
+                    <p class="fs-3 mb-3">People</p>
+                    <div class="message-user-list">
+                        <ul class="list-group">
+                            {% for users in all_user %}
+                            <a href="{% url 'message' receiver=users.username %}" class="mb-4">
+                                <div class="user-pro-pic me-3">
+                                    <img src="{{ users.userprofile.profile_pic.url }}" alt="{{ users.username }}">
+                                </div>
+                                <li class="fs-3">{{ users.first_name }} {{ users.last_name }}</li>
+                            </a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block adminjs %}
+<!-- Optional JavaScript; Bootstrap Bundle with Popper -->
+<script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}

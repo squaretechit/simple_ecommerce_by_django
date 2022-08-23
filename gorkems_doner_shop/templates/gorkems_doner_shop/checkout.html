@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/shop/checkout.css' %}">
+{% endblock %}
+{% block content %}
+<form action="{% url 'checkout' %}" method="post" novalidate>
+{% csrf_token %}
+{{ form.nonefield_errors }}
+    <section>
+        <div class="container">
+            <p class="fs-1">Billing Details</p>
+            <div class="row py-5">
+                <div class="col-md-7">
+                    <div class="billing-form">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">{{ form.first_name.label }}</label>
+                                {{ form.first_name }}
+                                <small class="form-text text-muted">{{ form.first_name.errors }}</small>
+                            </div>
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">{{ form.last_name.label }}</label>
+                                {{ form.last_name }}
+                                <small class="form-text text-muted">{{ form.last_name.errors }}</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">{{ form.email.label }}</label>
+                                {{ form.email }}
+                                <small class="form-text text-muted">{{ form.email.errors }}</small>
+                            </div>
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">Phone Number</label>
+                                {{ form.phone_number }}
+                                <small class="form-text text-muted">{{ form.phone_number.errors }}</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="floatingInput">Country / Region</label>
+                            {{ form.country }}
+                            <small class="form-text text-muted">{{ form.country.errors }}</small>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">Street</label>
+                                {{ form.street }}
+                                <small class="form-text text-muted">{{ form.street.errors }}</small>
+                            </div>
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">Optional</label>
+                                {{ form.optional }}
+                                <small class="form-text text-muted">{{ form.optional.errors }}</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">City</label>
+                                {{ form.city }}
+                                <small class="form-text text-muted">{{ form.city.errors }}</small>
+                            </div>
+                            <div class="mb-3 checkout-input">
+                                <label class="form-label">Post Code</label>
+                                {{ form.post_code }}
+                                <small class="form-text text-muted">{{ form.post_code.errors }}</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center my-5">
+                            <label class="form-check-label fs-3">Send To Different Address</label>
+                            {{ form.different_shipping_address }}
+                        </div>
+                        <div class="diffetent-address-block d-none">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">First Name</label>
+                                    {{ form.different_first_name }}
+                                </div>
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">Last Name</label>
+                                    {{ form.different_last_name }}
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">Email</label>
+                                    {{ form.different_email }}
+                                </div>
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">Phone Number</label>
+                                    {{ form.different_phone_number }}
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="floatingInput">Country / Region</label>
+                                {{ form.different_country }}
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">Street</label>
+                                    {{ form.different_street }}
+                                </div>
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">Optional</label>
+                                    {{ form.different_optional }}
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">City</label>
+                                    {{ form.different_city }}
+                                </div>
+                                <div class="mb-3 checkout-input">
+                                    <label class="form-label">Post Code</label>
+                                    {{ form.different_post_code }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 checkout-input">
+                            <label class="form-label">Comments on the order (optional)</label>
+                            {{ form.comment_on_the_order }}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card total-card mb-5 p-5">
+                        <p class="mb-3 fs-3">Shopping cart total</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>Subtotal</p>
+                            <p>{{ subtotal }} €</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>Shipping</p>
+                            <p>2.90 €</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>incl. 7% VAT</p>
+                            <p>{{ vat }} €</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>Total</p>
+                            <p>{{ total }} €</p>
+                        </div>
+                    </div>
+
+                    <div class="card p-3">
+                        <div class="mb-3 form-check">
+                            {{ form.payment }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-check my-5 text-center">
+                        {{ form.agree }}{{ form.agree.errors }}
+                        <label class="form-check-label">With your order you agree to our
+                            <a href="#"> general terms and conditions</a> , 
+                            <a href="#"> cancellation policy</a> and 
+                            <a href="#">data protection policy</a>.</label>
+                    </div>
+                    
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn checkout-btn">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+{% csrf_token %}
+{% endblock %}
+{% block js %}
+<script>
+    // Default Values id_city
+    document.querySelector('#id_first_name').value = '{{ user.first_name }}';
+    document.querySelector('#id_last_name').value = '{{ user.last_name }}';
+    document.querySelector('#id_email').value = '{{ user.email }}';
+    document.querySelector('#id_phone_number').value = '{{ user.userprofile.phone }}';
+    // country
+    document.querySelector('#id_street').value = '{{ user.userprofile.street }}';
+    document.querySelector('#id_city').value = '{{ user.userprofile.city }}';
+    document.querySelector('#id_post_code').value = '{{ user.userprofile.postcode }}';
+    // Different Shipping Address
+    let send_different_address = document.querySelector('#id_different_shipping_address'),
+        diffetent_address_block = document.querySelector('.diffetent-address-block');
+    send_different_address.addEventListener('click', function () {
+        if (send_different_address.checked == true) {
+            diffetent_address_block.classList.remove('d-none')
+        } else {
+            diffetent_address_block.classList.add('d-none')
+        }
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset Link</title>
+    <style>
+        body{
+            padding: 50px 0;
+        }
+        .btn-user {
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            padding: 10px 30px;
+            background-color: #CDA563;
+            color: #ffffff;
+            border: 1px solid #CDA563;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-user:hover {
+            color: #CDA563!important;
+            background-color: #ffffff;
+            border: 1px solid #CDA563;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Hello {{ user }},</h3>
+    <p>You're receiving this email because you requested a password 
+        reset for your user account at {{domain}}. Please click this 
+        "RESET PASSWORD" button below. It will redirect you to the 
+        password reset page on {{domain}} and choose 
+        a new password there:</p><br><br><br>
+    <a class="btn-user" href="http://{{domain}}{%url 'password_reset_confirm' uidb64=uid  token=token %}">
+        Reset Password
+    </a>
+    <br><br><br>
+    <p>Your username, in case you've forgotten: {{ username }}</p>
+    <br><br>
+    <p>Thank you for your consideration.<br>
+    Kindest regards<br>
+    Mukul Sohrab<br>
+    Founder Of {{ domain }}</p>
+</body>
+
+</html>

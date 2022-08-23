@@ -1,0 +1,9 @@
+Django==3.2.5
+django-ckeditor==6.1.0
+six==1.16.0
+Pillow==8.4.0
+django-paypal==1.1.1
+social-auth-app-django==5.0.0
+
+
+# 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

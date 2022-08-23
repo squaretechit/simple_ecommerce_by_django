@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/users/login.css' %}">
+{% endblock %}
+{% block content %}
+<div class="hero-wrap hero-bread">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'shop' %}">Shop</a></span> / <span>Login</span></p>
+          <h1 class="mb-0 bread">Login</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+<section>
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="logImg">
+                    <img src="{% static 'images/users/login.svg' %}" alt="login Img">
+                </div>
+                <div class="text-center py-5">
+                    <p>No account? Please <a class="btn-login" href="{% url 'register' %}">Register</a>.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 class="text-center">Login To your account</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}alert-success{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert-danger{% endif %}" role="alert">
+                        <h5 class="text-center">{{ message }}</h5>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form class="pt-5" action="{% url 'login' %}" method="post" novalidate>
+                    {% csrf_token %}
+                    {{ form.nonefield_errors }}
+
+                    {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+
+                    <div class="form-floating mb-3">
+                      {{ form.username }}
+                      <label for="floatingInput">{{ form.username.label }}</label>
+                      <small class="form-text text-muted">{{ form.username.errors }}</small>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      {{ form.password }}
+                      <label for="floatingInput">{{ form.password.label }}</label>
+                      <small class="form-text text-muted">{{ form.password.errors }}</small>
+                    </div>
+
+                    <div class="text-center my-3">
+                      <button type="submit" class="btn btn-register py-3 px-5">Login</button>
+                  </div>
+                  <div class="text-center">
+                    <a href="{% url 'facebook_login' %}" class="btn btn-register py-3 my-5">Login with facebook</a>
+                    <a href="{% url 'google_login' %}" class="btn btn-register py-3 my-5">Login with Google</a>
+                  </div>
+                    <p class="text-center py-5">Forgot your password? <a class="btn-login" href="{% url 'pass_rest' %}">Let's reset..</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

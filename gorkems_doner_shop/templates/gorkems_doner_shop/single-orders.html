@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Single Orders History{% endblock %}
+{% block css %}
+<style>
+    .order-list-title::before {
+        content: 'S/N:' !important;
+    }
+
+    .order-list-title {
+        color: #ffffff;
+        font-size: 22px;
+        background-color: #CDA563;
+    }
+
+    .order-history {
+        border-top-width: 1px !important;
+        font-size: 22px;
+    }
+
+    .order-history span {
+        width: 200px;
+    }
+
+    .order-history span:nth-child(4) {
+        width: 350px;
+    }
+
+    .payment-btn {
+        background-color: #CDA563;
+        color: #ffffff;
+        padding: 10px 30px;
+    }
+
+    .payment-btn:hover {
+        background-color: red;
+        color: #ffffff;
+    }
+
+    @media all and (max-width:1280px) {
+        .order-history span {
+            width: 300px;
+        }
+    }
+
+    @media all and (max-width:1024px) {
+        .order-history {
+            display: block !important;
+        }
+
+        .order-history span {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            width: auto;
+        }
+
+        .order-history span:nth-child(4) {
+            width: auto;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p class="mb-0"><b>Order Transaction ID:</b> {{ order.transaction_id }}</p>
+                <p class="mb-0"><b>Date Ordered:</b> {{ order.date_ordered }}</p>
+                <p class="mb-0"><b>Order Status:</b> {{ order.order_status }}</p>
+            </div>
+            <div class="col-md-4">
+                {% for shipping in shipping_address %}
+                <p class="mb-0"><b>Ordered By:</b> {{ shipping.first_name }} {{ shipping.last_name }}</p>
+                <p class="mb-0"><b>Email:</b> {{ shipping.email }}</p>
+                <p class="mb-0"><b>Phone:</b> {{ shipping.phone }}</p>
+                {% if shipping.different_street_address_optional %}
+                <p class="mb-0"><b>Optional Address:</b> {{ shipping.street_address_optional }}</p>
+                {% endif %}
+                <p class="mb-0"><b>Address:</b> {{ shipping.street_address }},
+                    {{ shipping.city }},
+                    {{ shipping.postcode }},
+                    {{ shipping.country }}</p>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                {% for shipping in shipping_address %}
+                {% if shipping.different_shipping_address %}
+                <p class="mb-0 fs-5">Different Shipping Address</p>
+                <p class="mb-0"><b>For:</b> {{ shipping.different_first_name }} {{ shipping.different_last_name }}</p>
+                <p class="mb-0"><b>Email:</b> {{ shipping.different_email }}</p>
+                <p class="mb-0"><b>Phone:</b> {{ shipping.different_phone }}</p>
+                {% if shipping.different_street_address_optional %}
+                <p class="mb-0"><b>Optional Address:</b> {{ shipping.different_street_address }}</p>
+                {% endif %}
+                <p class="mb-0"><b>Address:</b> {{ shipping.different_street_address }},
+                    {{ shipping.different_city }},
+                    {{ shipping.different_postcode }},
+                    {{ shipping.different_country }}</p>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <p class="my-5 text-center fs-2">All ordered product list are below:</p>
+
+        <ol class="list-group my-3">
+            <li
+                class="order-list-title list-group-item d-flex justify-content-between align-items-center order-history">
+                <span>Product Name</span>
+                <span>Product Price</span>
+                <span>Quantity</span>
+                <span>Total Price</span>
+            </li>
+        </ol>
+
+        <ol class="list-group list-group-numbered">
+            {% for item in order_item %}
+            <li class="my-3 list-group-item d-flex justify-content-between align-items-center order-history">
+                <span>{{ item.product_name }}</span>
+                <span>{{ item.price }} €</span>
+                <span>{{ item.quantity }}</span>
+                <span>{{ item.total_price }} €</span>
+            </li>
+            {% endfor %}
+        </ol>
+
+        <ol class="list-group">
+            <li class="my-3 list-group-item d-flex justify-content-between align-items-center order-history">
+                <span></span>
+                <span></span>
+                <span>Total (incl. 7% VAT):</span>
+                <span>{{ total_price_count }} €</span>
+            </li>
+        </ol>
+        {% if order.order_status == 'Unpaid' and order.date_ordered|date:"M d, Y" == today|date:"M d, Y" %}
+        <div class="d-flex justify-content-between align-items-center mt-5">
+            <p class="mb-0 fs-1">wanna pay now?</p>
+            <a href="{% url 'paypal-payment' transaction=order.transaction_id %}" class="text-decoration-none text-white">
+                <button class="btn payment-btn">Pay now</button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
