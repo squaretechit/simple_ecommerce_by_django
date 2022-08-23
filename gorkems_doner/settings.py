@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-z2i=j(%_#7vjo*(82j@9#3&_gifczx#4d5=pnxh$n^!+l^8n+%
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['gorkemsdoner.de','www.gorkemsdoner.de','159.89.48.56']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,21 +74,10 @@ WSGI_APPLICATION = 'gorkems_doner.wsgi.application'
 
 # Database
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gorkems_doner',
-        'USER': 'shoron',
-        'PASSWORD': '!Ichbin2019upG3g874',
-        'HOST': 'localhost',
-        'PORT': ''
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -142,16 +131,16 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Social Login API
 
-SOCIAL_AUTH_FACEBOOK_KEY = '326677758969306'  # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'c0fd32e59503ba79484684ad02e1b9f1'  # Facebook App Secret
-SOCIAL_AUTH_GOOGLE_KEY = '702255970313-gipjklttd2h5igvlrft9csgkpatpi2n2.apps.googleusercontent.com'  # Client ID
-SOCIAL_AUTH_GOOGLE_SECRET = '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'  # Client Secret
+SOCIAL_AUTH_FACEBOOK_KEY = ''  # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = ''  # Facebook App Secret
+SOCIAL_AUTH_GOOGLE_KEY = ''  # Client ID
+SOCIAL_AUTH_GOOGLE_SECRET = ''  # Client Secret
 
 # Gmail options webserver
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'lynbrookoptical8@gmail.com'
-EMAIL_HOST_PASSWORD = 'Shoron@007'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
 
